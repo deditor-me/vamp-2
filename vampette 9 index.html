@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Blast</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+
+  .heart {
+    position: absolute;
+    font-size: 24px;
+    user-select: none;
+    pointer-events: none;
+    animation: fall linear;
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(-50px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(110vh);
+      opacity: 0;
+    }
+  }
+
+  .blast {
+    position: absolute;
+    font-size: 2em;
+    opacity: 0;
+    animation: fadeInOut 4s ease forwards;
+  }
+
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+    }
+    25% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+<body>
+<script>
+const hearts = ['❤️', '💙', '💚', '💛', '💜', '🧡'];
+
+function createHeart() {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+  heart.style.left = Math.random() * window.innerWidth + 'px';
+  heart.style.top = '-30px';
+  heart.style.fontSize = (16 + Math.random() * 24) + 'px';
+  heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 7000);
+}
+
+function createFadeMessage() {
+  const message = document.createElement('div');
+  message.className = 'blast';
+  const rand = Math.random();
+  if (rand < 0.7) {
+    message.textContent = "I love you";
+  } else if (rand < 0.85) {
+    message.textContent = "Taisin";
+  } else {
+    message.textContent = "Vampette";
+  }
+  message.style.left = Math.random() * window.innerWidth + 'px';
+  message.style.top = Math.random() * window.innerHeight + 'px';
+  document.body.appendChild(message);
+  setTimeout(() => message.remove(), 5000);
+}
+
+window.onload = () => {
+  setInterval(createHeart, 150);
+  setInterval(createFadeMessage, 700);
+};
+</script>
+</body>
+</html>
